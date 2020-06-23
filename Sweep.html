@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>扫雷游戏</title>
+    <link rel="stylesheet" type="text/css" href="ground.css">
+    <link rel="stylesheet" type="text/css" href="customize_Alert.css">
+    <script type="text/javascript" src="initial_Ground.js"></script>
+    <script type="text/javascript" src="block_Click.js"></script>
+    <script type="text/javascript" src="block_Open.js"></script>
+    <script type="text/javascript" src="customize_Alert.js"></script>
+</head>
+
+<!-- ondragstart:防拖拽生成新页面 oncontextmenu:屏蔽右键菜单-->
+<body ondragstart='return false' oncontextmenu='self.event.returnValue=false' id="body">
+<p id='p'>
+    <span class='span'>Mine: <label id='count'>0</label></span>
+    <span class='span'>Time: <label id='time'>0</label>s</span>
+    <button onclick="start()">Start</button>
+    <input type="button" value="Restart" align="center" onclick="restart()">
+    <select id="s">
+        <option>--Please choose a difficulty degree--</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+    </select>
+</p>
+
+<table id='ground'></table>
+
+<script>
+    var row; //数组行数
+    var col; //数组列数
+    var maxCount; //最大地雷数量
+    var isFirstOpen = true; //第一次打开方格
+    var count; //剩余雷数
+    var ground;//初始化，得到二维数组
+    var time; //计时
+    var timer; //定时器 100ms执行一次
+
+    function start() {
+        swal(document.getElementById("s").value + " level")
+        switch (document.getElementById("s").value) {
+            case "Easy": {
+                row = 6; //数组行数
+                col = 6; //数组列数
+                maxCount = 6; //最大地雷数量
+                isFirstOpen = true;//第一次打开方格
+                count = document.getElementById('count'); //剩余雷数
+                ground = initial_ground(); //初始化，得到二维数组
+                time = document.getElementById('time'); //计时
+                timer = setInterval(function () {
+                    let seconds = (parseFloat(time.innerHTML) + 0.1).toFixed(1); //保留一位小数
+                    time.innerHTML = seconds;
+                }, 100) //定时器 100ms执行一次
+                break;
+            }
+            case "Medium": {
+                row = 10; //数组行数
+                col = 10; //数组列数
+                maxCount = 10; //最大地雷数量
+                isFirstOpen = true;//第一次打开方格
+                count = document.getElementById('count'); //剩余雷数
+                ground = initial_ground(); //初始化，得到二维数组
+                time = document.getElementById('time'); //计时
+                timer = setInterval(function () {
+                    let seconds = (parseFloat(time.innerHTML) + 0.1).toFixed(1); //保留一位小数
+                    time.innerHTML = seconds;
+                }, 100) //定时器 100ms执行一次
+                break;
+            }
+            case "Hard": {
+                row = 15; //数组行数
+                col = 15; //数组列数
+                maxCount = 15; //最大地雷数量
+                isFirstOpen = true;//第一次打开方格
+                count = document.getElementById('count'); //剩余雷数
+                ground = initial_ground(); //初始化，得到二维数组
+                time = document.getElementById('time'); //计时
+                timer = setInterval(function () {
+                    let seconds = (parseFloat(time.innerHTML) + 0.1).toFixed(1); //保留一位小数
+                    time.innerHTML = seconds;
+                }, 100) //定时器 100ms执行一次
+                break;
+            }
+        }
+    }
+
+    function restart() {
+        window.location.reload();
+    }
+
+</script>
+
+</body>
+
+</html>
